@@ -147,6 +147,17 @@
 }
 
 @layer components {
+  @import "partials/calendar.scss";
+  @import "partials/react-slect";
+  @import "partials/map";
+  @import "partials/shepherd";
+
+  @import "partials/extra/pagination";
+  @import "partials/extra/timeline";
+  @import "partials/extra/steps";
+
+  @import "partials/extra/scrollbar";
+  @import "partials/extra/slider";
 }
 
 .has-sticky-header {
@@ -309,9 +320,3 @@
     padding-bottom: 37px;
   }
 }
-
-@import "partials/calendar.scss";
-@import "partials/react-slect";
-@import "partials/map";
-@import "partials/shepherd";
-
