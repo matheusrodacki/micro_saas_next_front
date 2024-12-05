@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 
+
 const nextConfig = {
   webpack(config) {
     // Grab the existing rule that handles SVG imports
@@ -49,5 +50,6 @@ const nextConfig = {
     ],
   },
 };
+
 
 module.exports = nextConfig;

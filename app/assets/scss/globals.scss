@@ -147,17 +147,6 @@
 }
 
 @layer components {
-  @import "partials/calendar.scss";
-  @import "partials/react-slect";
-  @import "partials/map";
-  @import "partials/shepherd";
-
-  @import "partials/extra/pagination";
-  @import "partials/extra/timeline";
-  @import "partials/extra/steps";
-
-  @import "partials/extra/scrollbar";
-  @import "partials/extra/slider";
 }
 
 .has-sticky-header {
@@ -320,3 +309,15 @@
     padding-bottom: 37px;
   }
 }
+.no-scrollbar::-webkit-scrollbar {
+  width: 0px;
+}
+
+.no-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+@import "partials/calendar.scss";
+@import "partials/react-slect";
+@import "partials/map";
+@import "partials/shepherd";
