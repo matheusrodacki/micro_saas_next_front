@@ -1,10 +1,41 @@
 import Credentials from 'next-auth/providers/credentials';
 import { jwtDecode } from 'jwt-decode';
-import { User as UserType, user } from '@/app/api/user/data';
 import avatar3 from '@/public/images/avatar/avatar-3.jpg';
+import { JWT } from 'next-auth/jwt';
+import { DefaultSession, Session } from 'next-auth';
+import { StaticImageData } from 'next/image';
+import { ec } from '@fullcalendar/core/internal-common';
 
 interface JwtPayload {
   userId: string;
+}
+
+interface UserType {
+  id: string;
+  name: string;
+  image: StaticImageData;
+  password: string;
+  email: string;
+  resetToken: string | null;
+  resetTokenExpiry: Date | null;
+  profile: any;
+  accessToken: string; // Defina o tipo do accessToken
+}
+
+declare module 'next-auth' {
+  interface Session {
+    accessToken?: string;
+    user?: {
+      id: string;
+    } & DefaultSession['user'];
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    accessToken?: string;
+    id?: string;
+  }
 }
 
 export const authOptions = {
@@ -51,7 +82,7 @@ export const authOptions = {
               throw new Error('ID de usuário não encontrado no token');
             }
 
-            const foundUser = {
+            const foundUser: UserType = {
               id: userId,
               name: 'John Doe',
               image: avatar3,
@@ -60,9 +91,8 @@ export const authOptions = {
               resetToken: null,
               resetTokenExpiry: null,
               profile: null,
+              accessToken: data.accessToken,
             };
-
-            console.log('foundUser:', foundUser);
 
             return foundUser as any;
           } else {
@@ -78,6 +108,18 @@ export const authOptions = {
   secret: process.env.AUTH_SECRET,
   session: {
     strategy: 'jwt',
+  },
+  callbacks: {
+    async jwt({ token, user }: { token: JWT; user?: UserType }) {
+      if (user) {
+        token.accessToken = user.accessToken;
+      }
+      return token;
+    },
+    async session({ session, token }: { session: Session; token: JWT }) {
+      session.accessToken = token.accessToken;
+      return session;
+    },
   },
   debug: process.env.NODE_ENV !== 'production',
 };
