@@ -2,9 +2,8 @@ import Credentials from 'next-auth/providers/credentials';
 import { jwtDecode } from 'jwt-decode';
 import avatar3 from '@/public/images/avatar/avatar-3.jpg';
 import { JWT } from 'next-auth/jwt';
-import { DefaultSession, Session } from 'next-auth';
+import { DefaultSession, NextAuthOptions, Session } from 'next-auth';
 import { StaticImageData } from 'next/image';
-import { ec } from '@fullcalendar/core/internal-common';
 
 interface JwtPayload {
   userId: string;
@@ -20,6 +19,15 @@ interface UserType {
   resetTokenExpiry: Date | null;
   profile: any;
   accessToken: string; // Defina o tipo do accessToken
+}
+
+interface CustomUser {
+  email: string;
+  password?: string;
+  resetToken?: string;
+  resetTokenExpiry?: Date;
+  profile?: string;
+  accessToken?: string;
 }
 
 declare module 'next-auth' {
@@ -38,7 +46,7 @@ declare module 'next-auth/jwt' {
   }
 }
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     // GoogleProvider({
     //   clientId: process.env.AUTH_GOOGLE_ID as string,
@@ -110,13 +118,14 @@ export const authOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token, user }: { token: JWT; user?: UserType }) {
+    async jwt({ token, user }) {
       if (user) {
-        token.accessToken = user.accessToken;
+        const customUser = user as CustomUser;
+        token.accessToken = customUser.accessToken;
       }
       return token;
     },
-    async session({ session, token }: { session: Session; token: JWT }) {
+    async session({ session, token }) {
       session.accessToken = token.accessToken;
       return session;
     },
