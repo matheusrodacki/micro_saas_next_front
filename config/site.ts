@@ -1,20 +1,17 @@
-
-
-
 export const siteConfig = {
-  name: "DashTail Next js Admin Template",
+  name: 'Micro SaaS Dashboard',
   description: null,
-  theme: "violet",
-  layout: "vertical",
+  theme: 'violet',
+  layout: 'semi-box',
   // semi-box, horizontal, vertical
   hideSideBar: false,
-  sidebarType: "module",
+  sidebarType: 'popover',
   // popover, classic, module
   sidebarColor: null,
-  navbarType: "sticky",
+  navbarType: 'sticky',
   // sticky, floating, static
-  footerType: "static",
+  footerType: 'static',
   // sticky,  static, hidden
-  sidebarBg: "none",
+  sidebarBg: 'none',
   radius: 0.5,
 };
