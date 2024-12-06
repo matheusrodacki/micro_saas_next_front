@@ -1,8 +1,7 @@
 import Credentials from 'next-auth/providers/credentials';
 import { jwtDecode } from 'jwt-decode';
 import avatar3 from '@/public/images/avatar/avatar-3.jpg';
-import { JWT } from 'next-auth/jwt';
-import { DefaultSession, NextAuthOptions, Session } from 'next-auth';
+import { DefaultSession, NextAuthOptions } from 'next-auth';
 import { StaticImageData } from 'next/image';
 
 interface JwtPayload {

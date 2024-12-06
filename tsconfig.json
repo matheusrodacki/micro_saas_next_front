@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     // new
-    "noUnusedParameters": false,
+    "noUnusedParameters": true,
     "preserveWatchOutput": true,
     "strictNullChecks": true,
     "composite": false,
@@ -22,7 +22,7 @@
     "declarationMap": true,
     "forceConsistentCasingInFileNames": true,
     "inlineSources": false,
-    "noUnusedLocals": false,
+    "noUnusedLocals": true,
     "plugins": [
       {
         "name": "next"
