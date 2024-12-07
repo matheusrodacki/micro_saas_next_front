@@ -13,7 +13,7 @@ const layout = async ({
 }) => {
   const session = await getServerSession(authOptions as NextAuthOptions);
 
-  if (!session?.user?.email) {
+  if (!session?.accessToken) {
     redirect('/auth/login');
   }
 

@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import ClientsTable from './clientsTable';
 const ClientsPage = () => {
   return (
-    <div>
+    <>
       <Breadcrumbs>
         <BreadcrumbItem>Menu</BreadcrumbItem>
         <BreadcrumbItem className="text-primary">Clients</BreadcrumbItem>
@@ -19,7 +19,7 @@ const ClientsPage = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </>
   );
 };
 
